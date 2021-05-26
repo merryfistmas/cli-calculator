@@ -3,7 +3,8 @@ def operand():
     global op
     while True:
         try:
-            operator = int(input("Which function?\n1. Add\n2. Sub\n3. Multiply\n4. Divide\n5. Exponent\n6. Compound interest\n7. Combinations of things\n:"))
+            operator = int(input(
+                "Which function?\n1. Add\n2. Sub\n3. Multiply\n4. Divide\n5. Exponent\n6. Compound interest\n7. Combinations of things\n8. Factorial \n:"))
             if operator == 1:
                 op = "+"
                 break
@@ -23,12 +24,19 @@ def operand():
                 compound_interest()
                 break
             if operator == 7:
-                combination()
+                n = int(input("Enter number: "))
+                r = int(input("Enter sample: "))
+                nCr(n, r)
+                break
+            if operator == 8:
+                n = int(input("Enter a number: "))
+                factorial(n)
                 break
         except ValueError:
             print("Error, not a number")
         else:
             operand()
+
 
 def compound_interest():
     p = float(input("Enter the principal amount: "))
@@ -40,8 +48,23 @@ def compound_interest():
     print("Compound amount is $%.2f" % result)
     print("Compound interest is $%.2f" % interest)
 
-def combination():
-    pass
+
+def nCr(n, r):
+    result = (factorial(n) / (factorial(r) * factorial(n - r)))
+    print(result)
+
+
+def factorial(n):
+    factorial = 1
+    if int(n) >= 1:
+        for i in range(1, int(n)+1):
+            factorial = factorial * i
+    if operator == 8:
+        print(factorial)
+        return factorial
+    else:
+        return factorial
+
 
 def math():
     global a
@@ -62,6 +85,7 @@ def math():
     x = eval(str(a) + op + str(b))
     print(x)
 
+
 def doanother():
     while True:
         try:
@@ -73,9 +97,14 @@ def doanother():
                 break
         except ValueError:
             print("Invalid Input")
-    
+
 
 operand()
 if operator < 6:
     math()
-doanother()
+    doanother()
+else:
+    try:
+        doanother()
+    except NameError:
+        doanother()
